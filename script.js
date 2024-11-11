@@ -7,13 +7,16 @@ const numberButtons = document.querySelectorAll('div.test > button.number')
 const symbolButtons = document.querySelectorAll('.symbol')
 ////
 const inputTextDisplay = document.querySelector('.input');
+const sumTextDisplay = document.querySelector('.sum')
 let input = [];
-let total = 0;
+let sum = 0;
 // array of numbers from nodelist buttons?
 
 function add(number1, number2) {
-    sum + 1;
-    return sum += number; 
+    // sum = number1;
+    // input = number2;
+    // return sum += input;
+    return number1 + number2; 
 
 }
 
@@ -32,21 +35,28 @@ function divide() {
 
 
 
-console.log(numberButtons)
 numberButtons.forEach((button) => {
     button.addEventListener('click', function(e) {
-        // let val = e.target.textContent;
-        let newVal = Number(input.push(val));
-        console.log(newVal.join(""));
-        inputTextDisplay.textContent = input;
+        if (input.length <= 7){
+        let val = e.target.textContent;
+        console.log(val);
+        input.push(val); // push returns length of array
+        // console.log(input);
+        inputTextDisplay.textContent = input.join("");
+        
+        }
         return input;
     })
 })
 
 symbolButtons.forEach((button) => {
     button.addEventListener('click', function(e) {
-        let val = e.target.textContent;
-        console.log(`Function: ${val}`)
-        
+        let symbolVal = e.target.textContent;
+        console.log(symbolVal);
+        button.style.color = 'red';
+
+        if (symbolVal === '+') {
+            inputTextDisplay.textContent += "+ ";
+        }
     })
 })
