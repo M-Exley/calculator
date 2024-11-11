@@ -10,6 +10,7 @@ const symbolButtons = document.querySelectorAll('.symbol')
 const inputTextDisplay = document.querySelector('.input');
 const sumTextDisplay = document.querySelector('.sum')
 
+let sum = [];
 let input = [];
 let firstNumber = '';
 let operatorVar = '';
@@ -36,10 +37,14 @@ function divide(number1, number2) {
 function checkOperator() {
     symbolButtons.forEach((button) => {
         button.addEventListener('click', function() {
-        let symbolVal = button.value;
-         console.log(symbolVal);   
-         operatorVar = symbolVal;
-         return operatorVar;
+            if (button.value === '=') {
+                console.log(input);
+                return input;
+            }
+        operatorVar = button.value;
+        // input.push(operatorVar);
+        return input.split(",").concat(operatorVar)
+        //  return operatorVar;
         })
     })
 };
@@ -61,8 +66,10 @@ function operate(number1, number2){
 numberButtons.forEach((number) => {
     number.addEventListener('click', function() {
         let numberVal = Number(number.value);
+        console.log(numberVal);
         inputTextDisplay.textContent = numberVal;
         input.push(numberVal);
+        inputTextDisplay.textContent = input;
         return input.join("-");
     })
 })
