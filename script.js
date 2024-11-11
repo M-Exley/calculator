@@ -2,61 +2,71 @@
 
 const buttonAdd = document.querySelector('#add');
 const buttonSubtract = document.querySelector('#subtract');
+const buttonEquals = document.querySelector('#equals');
 ///
 const numberButtons = document.querySelectorAll('div.test > button.number')
 const symbolButtons = document.querySelectorAll('.symbol')
 ////
 const inputTextDisplay = document.querySelector('.input');
 const sumTextDisplay = document.querySelector('.sum')
+
 let input = [];
-let sum = 0;
+let firstNumber = '';
+let operatorVar = '';
+let secondNumber = '';
+
 // array of numbers from nodelist buttons?
 
 function add(number1, number2) {
-    // sum = number1;
-    // input = number2;
-    // return sum += input;
     return number1 + number2; 
-
 }
 
-function subtract() {
+function subtract(number1, number2) {
+    return number1 - number2;
+}
+
+function multiply(number1, number2) {
+    return number1 * number2;
+}
+
+function divide(number1, number2) {
+    return number1 / number2; 
+}
+
+function checkOperator() {
+    symbolButtons.forEach((button) => {
+        button.addEventListener('click', function() {
+        let symbolVal = button.value;
+         console.log(symbolVal);   
+         operatorVar = symbolVal;
+         return operatorVar;
+        })
+    })
+};
+
+function operate(number1, number2){
+    if (operatorVar === '+') {
+        return add(number1, number2)
+    } else if (operatorVar === '-') {
+        return subtract(number1, number2)
+    } else if (operatorVar === '*') {
+        return multiply(number1, number2)
+    } else if (operatorVar === '/') {
+       return divide(number1, number2)
+    }
     
-
-}
-
-function multiply() {
-
-}
-
-function divide() { 
-
 }
 
 
-
-numberButtons.forEach((button) => {
-    button.addEventListener('click', function(e) {
-        if (input.length <= 7){
-        let val = e.target.textContent;
-        console.log(val);
-        input.push(val); // push returns length of array
-        // console.log(input);
-        inputTextDisplay.textContent = input.join("");
-        
-        }
-        return input;
+numberButtons.forEach((number) => {
+    number.addEventListener('click', function() {
+        let numberVal = Number(number.value);
+        inputTextDisplay.textContent = numberVal;
+        input.push(numberVal);
+        return input.join("-");
     })
 })
 
-symbolButtons.forEach((button) => {
-    button.addEventListener('click', function(e) {
-        let symbolVal = e.target.textContent;
-        console.log(symbolVal);
-        button.style.color = 'red';
 
-        if (symbolVal === '+') {
-            inputTextDisplay.textContent += "+ ";
-        }
-    })
-})
+checkOperator();
+operate();
