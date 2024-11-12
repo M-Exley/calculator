@@ -7,14 +7,14 @@ const buttonEquals = document.querySelector('#equals');
 const numberButtons = document.querySelectorAll('div.test > button.number')
 const symbolButtons = document.querySelectorAll('.symbol')
 ////
-const inputTextDisplay = document.querySelector('.input');
+const operationArrayDisplay = document.querySelector('.input');
 const sumTextDisplay = document.querySelector('.sum')
 
 let sum = [];
-let input = [];
-let firstNumber = '';
+let operationArray = [];
+let newNumber = [];
 let operatorVar = '';
-let secondNumber = '';
+let secondNumber = [];
 
 // array of numbers from nodelist buttons?
 
@@ -38,13 +38,14 @@ function checkOperator() {
     symbolButtons.forEach((button) => {
         button.addEventListener('click', function() {
             if (button.value === '=') {
-                console.log(input);
-                return input;
+                console.log(operationArray);
+                return operationArray;
             }
         operatorVar = button.value;
-        // input.push(operatorVar);
-        return input.split(",").concat(operatorVar)
-        //  return operatorVar;
+        operationArray.push(operatorVar);
+        let concat = operationArray.join("");
+        console.log(concat);
+        operationArrayDisplay.textContent = concat;
         })
     })
 };
@@ -65,12 +66,16 @@ function operate(number1, number2){
 
 numberButtons.forEach((number) => {
     number.addEventListener('click', function() {
-        let numberVal = Number(number.value);
-        console.log(numberVal);
-        inputTextDisplay.textContent = numberVal;
-        input.push(numberVal);
-        inputTextDisplay.textContent = input;
-        return input.join("-");
+        let newNumber = Number(number.value);
+        console.log(newNumber);
+        if (operationArray.length) {
+            operationArray.push(newNumber)
+        } 
+        operationArray.push(newNumber);
+        // operationArray.concat(newNumber)
+        operationArrayDisplay.textContent = newNumber;
+        operationArrayDisplay.textContent = operationArray;
+        return operationArray.join;
     })
 })
 
