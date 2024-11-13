@@ -1,4 +1,6 @@
 'use strict'
+// idea: map button values to array of objects
+// .includes to check for operator
 
 const buttons = document.querySelectorAll('div > button') /// all buttons >> extract value
 ///// arrays and displays
@@ -51,19 +53,20 @@ function checkButton() {
             } else if (button.classList.contains('symbol')) {
                 operatorVar = button.value;
                 console.log(newNumber, operatorVar)
-                operationArray = [...newNumber, operatorVar];
+                operationArray = [...newNumber.join(""), operatorVar];
                 newNumber = [];
                 console.log(operationArray)
             } else if (newNumber && operatorVar) {
                 secondNumber.push(button.value);
                 operationArrayDisplay.textContent = Number(secondNumber.join(""));
-                console.log(newNumber, operatorVar)
+                const concatArr = operationArray.concat(secondNumber);
+                console.log(concatArr)
             } else if (button.classList.contains('equals')) {
                 console.log("equals");
                 // need to concat numbers and convert to string before this
                 operate(newNumber, secondNumber); // not yet but further down with parameters
             }
-            
+            // .find to filter out operator?
         })
     })
 }
