@@ -1,15 +1,29 @@
 'use strict'
+ // idea: .find to filter out operator?
 // idea: map button values to array of objects
+const numbers = [
+    { zero: 'zero', value: 0},
+    { one: 'one', value: 1},
+    { two: 'two', value: 2},
+    { three: 'three', value: 3},
+    { four: 'four', value: 4},
+    { five: 'five', value: 5},
+    { six: 'six', value: 6},
+    { seven: 'seven', value: 7},
+    { eight: 'eight', value: 8},
+    { nine: 'nine', value: 9},
+]
 // .includes to check for operator
 
 const buttons = document.querySelectorAll('div > button') /// all buttons >> extract value
 ///// arrays and displays
 let operationArray = [];
+let joinedOperation;
 const operationArrayDisplay = document.querySelector('.input');
 let sum = [];
 const sumTextDisplay = document.querySelector('.sum')
 ///
-let newNumber = [];
+// let newNumber = [];
 let operatorVar = '';
 let secondNumber = [];
 
@@ -48,62 +62,25 @@ function checkButton() {
     buttons.forEach((button) => {
         button.addEventListener('click', function() {
             if (button.classList.contains('number')) {
-                newNumber.push(button.value);
-                operationArrayDisplay.textContent = Number(newNumber.join(""));
+                operationArray.push(button.value);
+                joinedOperation = Number(operationArray.join(""));
+                console.log(typeof joinedOperation, joinedOperation)
+                operationArrayDisplay.textContent = joinedOperation;
             } else if (button.classList.contains('symbol')) {
+                console.log(button.value);
+                operationArray = [];
                 operatorVar = button.value;
-                console.log(newNumber, operatorVar)
-                operationArray = [...newNumber.join(""), operatorVar];
-                newNumber = [];
-                console.log(operationArray)
-            } else if (newNumber && operatorVar) {
-                secondNumber.push(button.value);
-                operationArrayDisplay.textContent = Number(secondNumber.join(""));
-                const concatArr = operationArray.concat(secondNumber);
-                console.log(concatArr)
-            } else if (button.classList.contains('equals')) {
-                console.log("equals");
-                // need to concat numbers and convert to string before this
-                operate(newNumber, secondNumber); // not yet but further down with parameters
-            }
-            // .find to filter out operator?
+                operationArrayDisplay.textContent = `${joinedOperation}${operatorVar}`;
+            } else if (joinedOperation.length) {
+                operationArray.push(button.value);
+                secondNumber = Number(operationArray.join(""));
+                operationArrayDisplay.textContent = `${secondNumber}`
+            } 
+            })
+           
         })
-    })
+
 }
-// function checkOperator() {
-//     symbolButtons.forEach((button) => {
-//         button.addEventListener('click', function() {
-//             if (button.value === '=') {
-//                 console.log(operationArray);
-//                 return operationArray;
-//             }
-//         operatorVar = button.value;
-//         operationArray.push(operatorVar);
-//         let concat = operationArray.join("");
-//         console.log(concat);
-//         operationArrayDisplay.textContent = concat;
-//         })
-//     })
-// };
-
-
-
-
-// numberButtons.forEach((number) => {
-//     number.addEventListener('click', function() {
-//         let newNumber = Number(number.value);
-//         console.log(newNumber);
-//         if (operationArray.length) {
-//             operationArray.push(newNumber)
-//         } 
-//         operationArray.push(newNumber);
-//         // operationArray.concat(newNumber)
-//         operationArrayDisplay.textContent = newNumber;
-//         operationArrayDisplay.textContent = operationArray;
-//         return operationArray.join;
-//     })
-// })
-
 
 checkButton();
 operate();
