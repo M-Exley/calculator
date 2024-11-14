@@ -61,7 +61,7 @@ function operate(number1, number2){
 function checkButton() {
     buttons.forEach((button) => {
         button.addEventListener('click', function() {
-            if (button.classList.contains('number') && joinedOperation <= 7) {
+            if (button.classList.contains('number') && !operatorVar) {
                 operationArray.push(button.value);
                 joinedOperation = Number(operationArray.join(""));
                 console.log("first")
@@ -71,13 +71,19 @@ function checkButton() {
                 operationArray = [];
                 operatorVar = button.value;
                 // operationArrayDisplay.textContent = `${joinedOperation + operatorVar}`;
-            } else if (button.classList.contains('number') && joinedOperation) {
+            } else if (button.classList.contains('number')) {
                 operationArray.push(button.value);
                 secondNumber = Number(operationArray.join(""));
                 console.log("second")
                 // operationArray = [];
                 operationArrayDisplay.textContent = secondNumber;
-            } 
+            } else if (button.classList.contains('clear')) {
+                location.reload();
+                // operationArray = []; // doesn't work as expected - defaults back to two
+                // secondNumber = []; 
+                // joinedOperation = [];
+                // operationArrayDisplay.textContent = '0';
+            }
             })
            
         })
