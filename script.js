@@ -18,7 +18,7 @@ const numbers = [
 const buttons = document.querySelectorAll('div > button') /// all buttons >> extract value
 ///// arrays and displays
 let operationArray = [];
-let joinedOperation;
+let joinedOperation = [];
 const operationArrayDisplay = document.querySelector('.input');
 let sum = [];
 const sumTextDisplay = document.querySelector('.sum')
@@ -61,20 +61,22 @@ function operate(number1, number2){
 function checkButton() {
     buttons.forEach((button) => {
         button.addEventListener('click', function() {
-            if (button.classList.contains('number')) {
+            if (button.classList.contains('number') && joinedOperation <= 7) {
                 operationArray.push(button.value);
                 joinedOperation = Number(operationArray.join(""));
-                console.log(typeof joinedOperation, joinedOperation)
+                console.log("first")
                 operationArrayDisplay.textContent = joinedOperation;
             } else if (button.classList.contains('symbol')) {
                 console.log(button.value);
                 operationArray = [];
                 operatorVar = button.value;
-                operationArrayDisplay.textContent = `${joinedOperation}${operatorVar}`;
-            } else if (joinedOperation.length) {
+                // operationArrayDisplay.textContent = `${joinedOperation + operatorVar}`;
+            } else if (button.classList.contains('number') && joinedOperation) {
                 operationArray.push(button.value);
                 secondNumber = Number(operationArray.join(""));
-                operationArrayDisplay.textContent = `${secondNumber}`
+                console.log("second")
+                // operationArray = [];
+                operationArrayDisplay.textContent = secondNumber;
             } 
             })
            
