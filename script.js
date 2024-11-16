@@ -83,12 +83,30 @@ function checkButton() {
                 // secondNumber = []; 
                 // joinedOperation = [];
                 // operationArrayDisplay.textContent = '0';
+            } else if (button.classList.contains('equals')) {
+                sum.push(operate(joinedOperation, secondNumber))
+                secondNumber = []; 
+                joinedOperation = [];
+                sumTextDisplay.textContent = sum;
+                operationArrayDisplay.textContent = '0';   
+            
             }
+            checkSum();
             })
-           
         })
-
-}
-
-checkButton();
+        
+    }
+// const sumArr = [0,1,2,3,4,5,6,7,8,9]
+    function checkSum() {
+        if (sum.length > 0) {
+            console.log("sum not empty")
+            operationArray = [];
+            secondNumber = []; 
+            joinedOperation = [];
+            operationArrayDisplay.textContent = '0';
+            operatorVar = '';
+        }
+    }
+    // checkSum();
+    checkButton();
 operate();
